@@ -13,7 +13,6 @@ services:
   app:
     build:
       context: .
-      target: build
     ports:
       - 3000:3000
     volumes:
