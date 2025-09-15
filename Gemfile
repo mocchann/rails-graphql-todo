@@ -13,6 +13,10 @@ gem "thruster", require: false
 gem "faker"
 gem "graphql"
 
+group :development do
+  gem "graphiql-rails"
+end
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
