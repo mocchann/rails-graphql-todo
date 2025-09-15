@@ -11,21 +11,24 @@ services:
       - .env
 
   app:
-    build: .
+    build:
+      context: .
+      target: build
     ports:
       - 3000:3000
     volumes:
-      - .:/app
+      - .:/rails
       - bundle_cache:/usr/local/bundle
     environment:
+      - BUNDLE_WITHOUT=
       - RAILS_ENV=development
       - TZ=Asia/Tokyo
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    working_dir: /rails
+    command: bash -lc "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     env_file:
       - .env
     depends_on:
       - db
-
 
 volumes:
   db-data:
