@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:15.3-alpine3.18
+    image: postgres:17-alpine
     environment:
       - TZ=Asia/Tokyo
     volumes:
@@ -18,9 +18,7 @@ services:
       - 3000:3000
     volumes:
       - .:/rails
-      - bundle_cache:/usr/local/bundle
     environment:
-      - BUNDLE_WITHOUT=
       - RAILS_ENV=development
       - TZ=Asia/Tokyo
     working_dir: /rails
@@ -32,6 +30,4 @@ services:
 
 volumes:
   db-data:
-    driver: local
-  bundle_cache:
     driver: local
