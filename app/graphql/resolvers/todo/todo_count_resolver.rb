@@ -1,11 +1,9 @@
-module Resolvers
-  module Todo
-    class TodoCountResolver < Resolvers::BaseResolver
-      type Integer, null: false
+module Resolver
+  class Resolvers::Todo::TodoCountResolver < Resolvers::BaseResolver
+    type Integer, null: false
 
-      def resolve
-        ::Todo.count
-      end
+    def resolve
+      Todo.count
     end
   end
 end

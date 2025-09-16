@@ -1,13 +1,11 @@
-module Resolvers
-  module Todo
-    class TodoResolver < Resolvers::BaseResolver
-      type Types::TodoType, null: true
+module Resolver
+  class Resolvers::Todo::TodoResolver < Resolvers::BaseResolver
+    type Types::TodoType, null: true
 
-      argument :id, ID, required: true
+    argument :id, ID, required: true
 
-      def resolve(id:)
-        ::Todo.find_by(id: id)
-      end
+    def resolve(id:)
+      Todo.find_by(id: id)
     end
   end
 end
