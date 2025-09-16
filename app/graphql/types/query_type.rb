@@ -21,13 +21,6 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
-
     field :todos, [Types::TodoType], null: false
     def todos
       Todo.all
@@ -38,6 +31,11 @@ module Types
     end
     def todo(id:)
       Todo.find(id)
+    end
+
+    field :todo_count, Integer, null: false
+    def todo_count
+      Todo.count
     end
   end
 end

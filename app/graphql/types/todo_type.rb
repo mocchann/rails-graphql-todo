@@ -7,10 +7,6 @@ module Types
     field :content, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :todo_count, Integer, null: false
 
-    def todo_count
-      object.todos.size
-    end
   end
 end

@@ -1,6 +1,6 @@
 10.times do
   Todo.create(
-    title: Faker::Food,
-    content: Faker::Mountain
+    title: Faker::Food.ingredient,
+    content: Faker::Mountain.name
   )
 end
