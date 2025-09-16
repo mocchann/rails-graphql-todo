@@ -21,11 +21,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
+    field :todos, resolver: Resolvers::Todo::TodosResolver
+
+    field :todo, resolver: Resolvers::Todo::TodoResolver
+
+    field :todo_count, resolver: Resolvers::Todo::TodoCountResolver
   end
 end
