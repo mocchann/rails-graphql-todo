@@ -21,10 +21,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :todos, resolver: Resolvers::TodosResolver
+    field :todos, resolver: Resolvers::Todo::TodosResolver
 
-    field :todo, resolver: Resolvers::TodoResolver
+    field :todo, resolver: Resolvers::Todo::TodoResolver
 
-    field :todo_count, resolver: Resolvers::TodoCountResolver
+    field :todo_count, resolver: Resolvers::Todo::TodoCountResolver
   end
 end
