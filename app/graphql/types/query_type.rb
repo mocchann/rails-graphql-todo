@@ -21,21 +21,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :todos, [Types::TodoType], null: false
-    def todos
-      Todo.all
-    end
+    field :todos, resolver: Resolvers::TodosResolver
 
-    field :todo, Types::TodoType, null: false do
-      argument :id, ID, required: true
-    end
-    def todo(id:)
-      Todo.find(id)
-    end
+    field :todo, resolver: Resolvers::TodoResolver
 
-    field :todo_count, Integer, null: false
-    def todo_count
-      Todo.count
-    end
+    field :todo_count, resolver: Resolvers::TodoCountResolver
   end
 end
