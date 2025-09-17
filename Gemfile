@@ -12,10 +12,12 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "faker"
 gem "graphql"
-gem 'sprockets-rails'
+gem "sprockets-rails"
 
 group :development do
   gem "graphiql-rails"
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 group :development, :test do

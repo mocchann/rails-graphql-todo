@@ -10,8 +10,8 @@ module Mobile::Types
       context.schema.object_from_id(id, context)
     end
 
-    field :nodes, [Mobile::Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
+    field :nodes, [ Mobile::Types::NodeType, null: true ], null: true, description: "Fetches a list of objects given a list of IDs." do
+      argument :ids, [ ID ], required: true, description: "IDs of the objects."
     end
 
     def nodes(ids:)
@@ -21,7 +21,7 @@ module Mobile::Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :todos, [Mobile::Types::TodoType], null: false, description: "Get all todos" do
+    field :todos, [ Mobile::Types::TodoType ], null: false, description: "Get all todos" do
       argument :limit, Integer, required: false, description: "Limit the number of todos returned"
     end
 

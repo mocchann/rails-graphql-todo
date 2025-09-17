@@ -4,7 +4,7 @@ module Mobile::Mutations::Todo
     argument :content, String, required: true
 
     field :todo, Mobile::Types::TodoType, null: false
-    field :errors, [String], null: false
+    field :errors, [ String ], null: false
 
     def resolve(title:, content:)
       todo = Todo.new(title:, content:)
