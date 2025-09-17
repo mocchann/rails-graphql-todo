@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class RailsGraphqlTodoSchema < GraphQL::Schema
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+class Mobile::RailsGraphqlTodoSchema < GraphQL::Schema
+  mutation(Mobile::Types::MutationType)
+  query(Mobile::Types::QueryType)
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader

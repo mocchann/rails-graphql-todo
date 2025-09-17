@@ -1,8 +1,8 @@
-module Mutation
-  class Mutations::Todo::DeleteTodo < Mutations::BaseMutation
+module Mobile::Mutations::Todo
+  class DeleteTodo < Mobile::Mutations::BaseMutation
     argument :id, Integer, required: true
 
-    field :todo, Types::TodoType, null: true
+    field :todo, Mobile::Types::TodoType, null: true
     field :errors, [String], null: false
 
     def resolve(id:)

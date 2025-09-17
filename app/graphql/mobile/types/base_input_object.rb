@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Types
+module Mobile::Types
   class BaseInputObject < GraphQL::Schema::InputObject
-    argument_class Types::BaseArgument
+    argument_class Mobile::Types::BaseArgument
   end
 end

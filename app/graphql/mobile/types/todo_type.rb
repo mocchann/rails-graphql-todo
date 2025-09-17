@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Types
-  class TodoType < Types::BaseObject
+module Mobile::Types
+  class TodoType < Mobile::Types::BaseObject
     field :id, ID, null: false
     field :title, String
     field :content, String
