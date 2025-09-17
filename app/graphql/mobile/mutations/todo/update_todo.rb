@@ -1,15 +1,15 @@
-module Mutation
-  class Mutations::Todo::UpdateTodo < Mutations::BaseMutation
+module Mobile::Mutations::Todo
+  class UpdateTodo < Mobile::Mutations::BaseMutation
     argument :id, Integer, required: true
     argument :title, String, required: true
     argument :content, String, required: true
 
-    field :todo, Types::TodoType, null: false
-    field :errors, [String], null: false
+    field :todo, Mobile::Types::TodoType, null: false
+    field :errors, [ String ], null: false
 
     def resolve(id:, title:, content:)
       todo = Todo.find_by(id: id)
-      return { todo: nil, errors: ['Todo not found'] } if todo.nil?
+      return { todo: nil, errors: [ "Todo not found" ] } if todo.nil?
 
       if todo.update(title: title, content: content)
         { todo: todo, errors: [] }

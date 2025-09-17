@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Types
+module Mobile::Types
   module BaseInterface
     include GraphQL::Schema::Interface
-    edge_type_class(Types::BaseEdge)
-    connection_type_class(Types::BaseConnection)
+    edge_type_class(Mobile::Types::BaseEdge)
+    connection_type_class(Mobile::Types::BaseConnection)
 
-    field_class Types::BaseField
+    field_class Mobile::Types::BaseField
   end
 end

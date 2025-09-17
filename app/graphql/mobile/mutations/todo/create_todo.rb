@@ -1,10 +1,10 @@
-module Mutation
-  class Mutations::Todo::CreateTodo < Mutations::BaseMutation
+module Mobile::Mutations::Todo
+  class CreateTodo < Mobile::Mutations::BaseMutation
     argument :title, String, required: true
     argument :content, String, required: true
 
-    field :todo, Types::TodoType, null: false
-    field :errors, [String], null: false
+    field :todo, Mobile::Types::TodoType, null: false
+    field :errors, [ String ], null: false
 
     def resolve(title:, content:)
       todo = Todo.new(title:, content:)
