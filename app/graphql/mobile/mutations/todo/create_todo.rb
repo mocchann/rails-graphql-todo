@@ -7,11 +7,13 @@ module Mobile::Mutations::Todo
     field :errors, [ String ], null: false
 
     def resolve(title:, content:)
-      todo = Todo.new(title:, content:)
+      return { todo: nil, errors: ['You must be signed in to create a todo'] } unless context[:current_user]
+
+      todo = Todo.new(title:, content:, user: context[:current_user])
       if todo.save
         { todo: todo, errors: [] }
       else
-        { todo: nil, errors: todo.errors.full_message }
+        { todo: nil, errors: todo.errors.full_messages }
       end
     end
   end

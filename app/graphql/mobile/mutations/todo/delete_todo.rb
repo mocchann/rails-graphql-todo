@@ -6,8 +6,10 @@ module Mobile::Mutations::Todo
     field :errors, [ String ], null: false
 
     def resolve(id:)
-      todo = Todo.find_by(id: id)
-      return { todo: nil, errors: [ "Todo not found" ] } if todo.nil?
+      return { todo: nil, errors: ['You must be signed in to delete a todo'] } unless context[:current_user]
+
+      todo = context[:current_user].todos.find_by(id: id)
+      return { todo: nil, errors: ['Todo not found'] } if todo.nil?
 
       todo.destroy
       return { todo: todo, errors: [] } if todo.destroyed?
