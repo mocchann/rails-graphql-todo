@@ -5,5 +5,10 @@ module Mobile::Types
     field :create_todo, mutation: Mobile::Mutations::Todo::CreateTodo
     field :update_todo, mutation: Mobile::Mutations::Todo::UpdateTodo
     field :delete_todo, mutation: Mobile::Mutations::Todo::DeleteTodo
+    
+    # 認証関連
+    field :sign_up, mutation: Mobile::Mutations::Auth::SignUp
+    field :sign_in, mutation: Mobile::Mutations::Auth::SignIn
+    field :sign_out, mutation: Mobile::Mutations::Auth::SignOut
   end
 end
