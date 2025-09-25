@@ -37,9 +37,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.timestamps null: false
     end
 
-    # 大文字小文字を区別しないインデックスを作成
-    add_index :users, "LOWER(username)",     unique: true, name: "index_users_on_lower_username"
-    add_index :users, "LOWER(email)",        unique: true, name: "index_users_on_lower_email"
+    add_index :users, :username, unique: true
+    add_index :users, :email,    unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
