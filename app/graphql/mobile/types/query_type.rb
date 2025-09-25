@@ -27,7 +27,7 @@ module Mobile::Types
 
     def todos(limit: nil)
       return [] unless context[:current_user]
-      
+
       relation = context[:current_user].todos
       relation = relation.limit(limit) if limit.present?
       relation
@@ -47,7 +47,7 @@ module Mobile::Types
 
     def todo_count
       return 0 unless context[:current_user]
-      
+
       context[:current_user].todos.count
     end
 

@@ -8,7 +8,7 @@ module Mobile::Mutations::Auth
     argument :password_confirmation, String, required: true
 
     field :user, Mobile::Types::UserType, null: true
-    field :errors, [String], null: false
+    field :errors, [ String ], null: false
 
     def resolve(username:, email:, password:, password_confirmation:)
       user = User.new(

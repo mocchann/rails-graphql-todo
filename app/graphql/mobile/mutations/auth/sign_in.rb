@@ -6,16 +6,16 @@ module Mobile::Mutations::Auth
     argument :password, String, required: true
 
     field :user, Mobile::Types::UserType, null: true
-    field :errors, [String], null: false
+    field :errors, [ String ], null: false
 
     def resolve(email:, password:)
       user = User.find_for_database_authentication(login: email)
-      
+
       if user && user.valid_password?(password)
         sign_in(user)
         { user: user, errors: [] }
       else
-        { user: nil, errors: ['Invalid email or password'] }
+        { user: nil, errors: [ "Invalid email or password" ] }
       end
     end
 
@@ -26,7 +26,7 @@ module Mobile::Mutations::Auth
     end
 
     def warden
-      request.env['warden']
+      request.env["warden"]
     end
   end
 end
