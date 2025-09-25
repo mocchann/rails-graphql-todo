@@ -21,28 +21,40 @@ module Mobile::Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :todos, [ Mobile::Types::TodoType ], null: false, description: "Get all todos" do
+    field :todos, [ Mobile::Types::TodoType ], null: false, description: "Get all todos for current user" do
       argument :limit, Integer, required: false, description: "Limit the number of todos returned"
     end
 
     def todos(limit: nil)
-      relation = Todo.all
+      return [] unless context[:current_user]
+      
+      relation = context[:current_user].todos
       relation = relation.limit(limit) if limit.present?
       relation
     end
 
-    field :todo, Mobile::Types::TodoType, null: true, description: "Get a specific todo by ID" do
+    field :todo, Mobile::Types::TodoType, null: true, description: "Get a specific todo by ID for current user" do
       argument :id, ID, required: true, description: "ID of the todo"
     end
 
     def todo(id:)
-      Todo.find_by(id: id)
+      return nil unless context[:current_user]
+
+      context[:current_user].todos.find_by(id: id)
     end
 
-    field :todo_count, Integer, null: false, description: "Get the total count of todos"
+    field :todo_count, Integer, null: false, description: "Get the total count of todos for current user"
 
     def todo_count
-      Todo.count
+      return 0 unless context[:current_user]
+      
+      context[:current_user].todos.count
+    end
+
+    field :auth, Mobile::Types::AuthType, null: false, description: "Get current authentication status"
+
+    def auth
+      {}
     end
   end
 end
