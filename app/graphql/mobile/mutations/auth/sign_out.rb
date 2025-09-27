@@ -21,7 +21,7 @@ module Mobile::Mutations::Auth
     end
 
     def warden
-      request.env["warden"]
+      context[:request].env["warden"]
     end
   end
 end

@@ -2,13 +2,14 @@
 
 module Mobile::Mutations::Auth
   class SignIn < Mobile::Mutations::BaseMutation
-    argument :email, String, required: true
-    argument :password, String, required: true
+    argument :input, Mobile::Types::SignIn, required: true
 
     field :user, Mobile::Types::UserType, null: true
     field :errors, [ String ], null: false
 
-    def resolve(email:, password:)
+    def resolve(input:)
+      email = input[:email]
+      password = input[:password]
       user = User.find_for_database_authentication(login: email)
 
       if user && user.valid_password?(password)
@@ -26,7 +27,7 @@ module Mobile::Mutations::Auth
     end
 
     def warden
-      request.env["warden"]
+      context[:request].env["warden"]
     end
   end
 end

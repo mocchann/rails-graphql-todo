@@ -2,15 +2,16 @@
 
 module Mobile::Mutations::Auth
   class SignUp < Mobile::Mutations::BaseMutation
-    argument :username, String, required: true
-    argument :email, String, required: true
-    argument :password, String, required: true
-    argument :password_confirmation, String, required: true
+    argument :input, Mobile::Types::SignUp, required: true
 
     field :user, Mobile::Types::UserType, null: true
     field :errors, [ String ], null: false
 
-    def resolve(username:, email:, password:, password_confirmation:)
+    def resolve(input:)
+      username = input[:username]
+      email = input[:email]
+      password = input[:password]
+      password_confirmation = input[:password_confirmation]
       user = User.new(
         username: username,
         email: email,

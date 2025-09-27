@@ -26,8 +26,13 @@ module Mobile::Types
     end
 
     def todos(limit: nil)
+      # 開発環境では認証をスキップしてテスト用データを返す
+      if Rails.env.development? && !context[:current_user]
+        return Todo.limit(limit || 10)
+      end
+      
       return [] unless context[:current_user]
-
+      
       relation = context[:current_user].todos
       relation = relation.limit(limit) if limit.present?
       relation
@@ -38,6 +43,11 @@ module Mobile::Types
     end
 
     def todo(id:)
+      # 開発環境では認証をスキップしてテスト用データを返す
+      if Rails.env.development? && !context[:current_user]
+        return Todo.find_by(id: id)
+      end
+      
       return nil unless context[:current_user]
 
       context[:current_user].todos.find_by(id: id)
@@ -46,8 +56,13 @@ module Mobile::Types
     field :todo_count, Integer, null: false, description: "Get the total count of todos for current user"
 
     def todo_count
+      # 開発環境では認証をスキップしてテスト用データを返す
+      if Rails.env.development? && !context[:current_user]
+        return Todo.count
+      end
+      
       return 0 unless context[:current_user]
-
+      
       context[:current_user].todos.count
     end
 
