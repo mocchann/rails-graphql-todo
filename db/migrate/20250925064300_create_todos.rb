@@ -3,6 +3,7 @@ class CreateTodos < ActiveRecord::Migration[8.0]
     create_table :todos do |t|
       t.string :title
       t.text :content
+      t.references :user, null: false, foreign_key: true
       t.timestamps
     end
   end
