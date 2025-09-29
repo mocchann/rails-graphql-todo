@@ -13,6 +13,7 @@ gem "thruster", require: false
 gem "faker"
 gem "graphql"
 gem "sprockets-rails"
+gem "devise"
 
 group :development do
   gem "graphiql-rails"
