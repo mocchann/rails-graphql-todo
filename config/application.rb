@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require "packs/rails/railtie"
 
 require "sprockets/railtie"
 
@@ -39,5 +40,9 @@ module RailsGraphqlTodo
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Add packs to autoload paths
+    config.autoload_paths += Dir[Rails.root.join("packs/*/app/public")]
+    config.autoload_paths += Dir[Rails.root.join("packs/*/app/private")]
   end
 end

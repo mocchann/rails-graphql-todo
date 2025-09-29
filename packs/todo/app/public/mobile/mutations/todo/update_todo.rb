@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mobile::Mutations::Todo
   class UpdateTodo < Mobile::Mutations::BaseMutation
     argument :id, Integer, required: true

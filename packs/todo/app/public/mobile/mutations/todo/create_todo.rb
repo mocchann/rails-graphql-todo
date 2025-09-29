@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mobile::Mutations::Todo
   class CreateTodo < Mobile::Mutations::BaseMutation
     argument :title, String, required: true
