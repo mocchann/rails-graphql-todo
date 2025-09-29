@@ -30,9 +30,9 @@ module Mobile::Types
       if Rails.env.development? && !context[:current_user]
         return Todo.limit(limit || 10)
       end
-      
+
       return [] unless context[:current_user]
-      
+
       relation = context[:current_user].todos
       relation = relation.limit(limit) if limit.present?
       relation
@@ -47,7 +47,7 @@ module Mobile::Types
       if Rails.env.development? && !context[:current_user]
         return Todo.find_by(id: id)
       end
-      
+
       return nil unless context[:current_user]
 
       context[:current_user].todos.find_by(id: id)
@@ -60,9 +60,9 @@ module Mobile::Types
       if Rails.env.development? && !context[:current_user]
         return Todo.count
       end
-      
+
       return 0 unless context[:current_user]
-      
+
       context[:current_user].todos.count
     end
 
