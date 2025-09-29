@@ -22,13 +22,14 @@ module Mobile::Types
     # They will be entry points for queries on your schema.
 
     field :todos, [ Mobile::Types::TodoType ], null: false, description: "Get all todos for current user" do
+      argument :userId, ID, required: true, description: "ID of the user"
       argument :limit, Integer, required: false, description: "Limit the number of todos returned"
     end
 
-    def todos(limit: nil)
+    def todos(userId:, limit: nil)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.limit(limit || 10)
+        return Todo.where(user_id: userId).limit(limit || 10)
       end
 
       return [] unless context[:current_user]
@@ -40,12 +41,13 @@ module Mobile::Types
 
     field :todo, Mobile::Types::TodoType, null: true, description: "Get a specific todo by ID for current user" do
       argument :id, ID, required: true, description: "ID of the todo"
+      argument :userId, ID, required: true, description: "ID of the user"
     end
 
-    def todo(id:)
+    def todo(id:, userId:)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.find_by(id: id)
+        return Todo.find_by(id: id, user_id: userId)
       end
 
       return nil unless context[:current_user]
@@ -53,12 +55,14 @@ module Mobile::Types
       context[:current_user].todos.find_by(id: id)
     end
 
-    field :todo_count, Integer, null: false, description: "Get the total count of todos for current user"
+    field :todo_count, Integer, null: false, description: "Get the total count of todos for current user" do
+      argument :userId, ID, required: true, description: "ID of the user"
+    end
 
-    def todo_count
+    def todo_count(userId:)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.count
+        return Todo.where(user_id: userId).count
       end
 
       return 0 unless context[:current_user]
