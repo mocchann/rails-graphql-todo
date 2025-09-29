@@ -14,7 +14,7 @@ class TodoService
     update_params[:title] = title if title
     update_params[:description] = description if description
     update_params[:completed] = completed if !completed.nil?
-    
+
     todo.update!(update_params)
     todo
   end
