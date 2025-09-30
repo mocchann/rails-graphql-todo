@@ -8,6 +8,7 @@ enforce_dependencies: true
 # Note that packages in this list require their own `package.yml` file
 dependencies:
   - "."
+  - "packs/todo"
 
 # A list of this package's public API
 # Public API is accessible from other packages
