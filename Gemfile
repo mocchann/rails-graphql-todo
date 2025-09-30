@@ -17,6 +17,7 @@ gem "devise"
 gem "packwerk"
 gem "packs-rails"
 gem "packwerk-extensions"
+gem "sidekiq"
 
 group :development do
   gem "graphiql-rails"
