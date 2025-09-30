@@ -12,7 +12,7 @@ module Mobile::Mutations
     def resolve(name: "World")
       # バックグラウンドジョブをキューに追加
       HelloWorldJob.perform_async(name)
-      
+
       {
         success: true,
         message: "バックグラウンドジョブがキューに追加されました！名前: #{name}"

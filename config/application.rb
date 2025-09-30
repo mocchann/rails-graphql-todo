@@ -5,7 +5,7 @@ require "packs/rails/railtie"
 
 require "sprockets/railtie"
 
-require 'sidekiq'
+require "sidekiq"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -44,7 +44,7 @@ module RailsGraphqlTodo
     config.api_only = true
 
     # Enable sessions for Sidekiq Web UI
-    config.session_store :cookie_store, key: '_rails_graphql_todo_session'
+    config.session_store :cookie_store, key: "_rails_graphql_todo_session"
 
     # Add packs to autoload paths
     config.autoload_paths += Dir[Rails.root.join("packs/*/app/public")]
