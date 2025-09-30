@@ -5,6 +5,7 @@ module Mobile::Types
     field :id, ID, null: false
     field :title, String
     field :content, String
+    field :completed, Boolean, null: false
     field :user, Mobile::Types::UserType, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

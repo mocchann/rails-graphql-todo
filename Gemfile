@@ -14,6 +14,9 @@ gem "faker"
 gem "graphql"
 gem "sprockets-rails"
 gem "devise"
+gem "packwerk"
+gem "packs-rails"
+gem "packwerk-extensions"
 
 group :development do
   gem "graphiql-rails"

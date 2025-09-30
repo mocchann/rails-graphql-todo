@@ -29,14 +29,13 @@ module Mobile::Types
     def todos(user_id:, limit: nil)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.where(user_id: user_id).limit(limit || 100)
+        return TodoService.find_todos_by_user(user_id: user_id, limit: limit || 100)
       end
 
       return [] unless context[:current_user]
 
-      relation = context[:current_user].todos
-      relation = relation.limit(limit) if limit.present?
-      relation
+      user = AuthService.find_user(user_id)
+      AuthService.user_todos(user).limit(limit || 100)
     end
 
     field :todo, Mobile::Types::TodoType, null: true, description: "Get a specific todo by ID for current user" do
@@ -47,12 +46,12 @@ module Mobile::Types
     def todo(id:, user_id:)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.find_by(id: id, user_id: user_id)
+        return TodoService.find_todo_by_user_and_id(id: id, user_id: user_id)
       end
 
       return nil unless context[:current_user]
 
-      context[:current_user].todos.find_by(id: id)
+      TodoService.find_todo_by_user_and_id(id: id, user_id: user_id)
     end
 
     field :todo_count, Integer, null: false, description: "Get the total count of todos for current user" do
@@ -62,12 +61,12 @@ module Mobile::Types
     def todo_count(user_id:)
       # 開発環境では認証をスキップしてテスト用データを返す
       if Rails.env.development? && !context[:current_user]
-        return Todo.where(user_id: user_id).count
+        return TodoService.todo_count_by_user(user_id: user_id)
       end
 
       return 0 unless context[:current_user]
 
-      context[:current_user].todos.count
+      TodoService.todo_count_by_user(user_id: user_id)
     end
 
     field :auth, Mobile::Types::AuthType, null: false, description: "Get current authentication status"

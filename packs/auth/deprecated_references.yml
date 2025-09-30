@@ -1,0 +1,8 @@
+# This file contains a list of dependencies that are not part of the long term plan for the Auth package.
+# We should generally aim to reduce this list over time.
+# The format is not necessarily a 1:1 mapping.
+#
+# For more information on how to use this file, see:
+# https://github.com/Shopify/packwerk/blob/main/USAGE.md#deprecated-references
+
+{}

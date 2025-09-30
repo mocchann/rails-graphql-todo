@@ -1,0 +1,21 @@
+# This file represents the Auth package
+# Auth package handles user authentication and authorization
+
+# Change to `true` to turn on dependency checks for this package
+enforce_dependencies: true
+
+# A list of this package's dependencies
+# Note that packages in this list require their own `package.yml` file
+dependencies:
+  - "."
+  - "packs/todo"
+
+# A list of this package's public API
+# Public API is accessible from other packages
+public_api:
+  - "packs/auth/app/public/**/*"
+
+# A list of this package's private implementation
+# Private implementation should not be accessed from other packages
+private_implementation:
+  - "packs/auth/app/private/**/*"
