@@ -13,14 +13,17 @@ module Mobile::Mutations::Todo
     def resolve(id:, title:, content:, user_id:)
       # return { todo: nil, errors: [ "You must be signed in to update a todo" ] } unless context[:current_user]
 
-      todo = Todo.find_by(id: id, user_id: user_id)
+      todo = TodoService.find_todo_by_user_and_id(id: id, user_id: user_id)
       return { todo: nil, errors: [ "Todo not found" ] } if todo.nil?
 
-      if todo.update(title: title, content: content)
-        { todo: todo, errors: [] }
-      else
-        { todo: nil, errors: todo.errors.full_messages }
-      end
+      TodoService.update_todo_with_params(
+        todo: todo,
+        title: title,
+        content: content
+      )
+      { todo: todo, errors: [] }
+    rescue ActiveRecord::RecordInvalid => e
+      { todo: nil, errors: e.record.errors.full_messages }
     end
   end
 end

@@ -1,29 +1,55 @@
 # frozen_string_literal: true
 
-# Public API for Todo business logic
+# TodoService provides a public API for todo operations
 class TodoService
-  def self.create_todo(user:, title:, description: nil)
-    user.todos.create!(
+  # Todo management
+  def self.find_todo(id)
+    Todo.find(id)
+  end
+
+  def self.find_todo_by_user_and_id(user_id:, id:)
+    Todo.find_by(id: id, user_id: user_id)
+  end
+
+  def self.find_todos_by_user(user_id:, limit: nil)
+    todos = Todo.where(user_id: user_id)
+    todos = todos.limit(limit) if limit
+    todos
+  end
+
+  def self.create_todo(params)
+    Todo.create!(params)
+  end
+
+  def self.update_todo(todo, params)
+    todo.update!(params)
+  end
+
+  def self.destroy_todo(todo)
+    todo.destroy!
+  end
+
+  # Todo queries
+  def self.todo_count_by_user(user_id:)
+    Todo.where(user_id: user_id).count
+  end
+
+  # Business logic
+  def self.create_todo_with_user(title:, content:, user:)
+    Todo.create!(
       title: title,
-      description: description
+      content: content,
+      user: user
     )
   end
 
-  def self.update_todo(todo:, title: nil, description: nil, completed: nil)
+  def self.update_todo_with_params(todo:, title: nil, content: nil, completed: nil)
     update_params = {}
     update_params[:title] = title if title
-    update_params[:description] = description if description
+    update_params[:content] = content if content
     update_params[:completed] = completed if !completed.nil?
 
     todo.update!(update_params)
     todo
-  end
-
-  def self.delete_todo(todo:)
-    todo.destroy!
-  end
-
-  def self.find_todos_for_user(user:)
-    user.todos.order(created_at: :desc)
   end
 end

@@ -12,13 +12,15 @@ module Mobile::Mutations::Todo
     def resolve(title:, content:, userId:)
       # return { todo: nil, errors: [ "You must be signed in to create a todo" ] } unless context[:current_user]
 
-      # todo = Todo.new(title:, content:, user: context[:current_user])
-      todo = Todo.new(title:, content:, user: User.find(userId))
-      if todo.save
-        { todo: todo, errors: [] }
-      else
-        { todo: nil, errors: todo.errors.full_messages }
-      end
+      user = AuthService.find_user(userId)
+      todo = TodoService.create_todo_with_user(
+        title: title,
+        content: content,
+        user: user
+      )
+      { todo: todo, errors: [] }
+    rescue ActiveRecord::RecordInvalid => e
+      { todo: nil, errors: e.record.errors.full_messages }
     end
   end
 end
