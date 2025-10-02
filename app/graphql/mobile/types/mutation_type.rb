@@ -10,5 +10,8 @@ module Mobile::Types
     field :sign_up, mutation: Mobile::Mutations::Auth::SignUp
     field :sign_in, mutation: Mobile::Mutations::Auth::SignIn
     field :sign_out, mutation: Mobile::Mutations::Auth::SignOut
+
+    # バックグラウンドジョブ関連
+    field :trigger_background_job, mutation: Mobile::Mutations::TriggerBackgroundJob
   end
 end
